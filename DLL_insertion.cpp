@@ -1,4 +1,3 @@
-
 #include<iostream>
 using namespace std;
 
@@ -58,6 +57,34 @@ void insertAfter(Node* head, int val, int k)
 	newNode->prev = curr;
 }
 
+void deleteNode(Node* head, int val)
+{
+	if(head == nullptr)
+		return;
+	Node* curr = head;
+	Node* prev =head;
+	while(curr != nullptr && curr->data != val)
+	{
+		prev = curr;
+		curr = curr->next;
+	}
+
+	if(curr == nullptr)
+		cout << "node not found\n";
+
+	else if(curr->data == val)
+	{
+		curr->next->prev = prev;
+		prev->next = curr->next;
+		//free(curr);
+		delete curr; //either or them works
+		//Note: delete is a operator. It calls the destructor. Free is a function, hence free is slower
+		//use delete for new and free for malloc(mode of creation)
+		//both for HEAP and never for stack
+
+	}
+}
+
 void push(Node** head_ref, int val)
 {
 	Node* newNode = getNewNode(val);
@@ -70,6 +97,7 @@ void push(Node** head_ref, int val)
 		*head_ref = newNode;
 	}
 }
+
 
 void print(Node* head)
 {
@@ -101,7 +129,9 @@ int main()
 	insertAfter(head, 6, 4);
 	print(head);
 
-
+	//delete a value
+	deleteNode(head, 5);
+	print(head);
 
 	cout << "La Fin!";
 	return 0;
