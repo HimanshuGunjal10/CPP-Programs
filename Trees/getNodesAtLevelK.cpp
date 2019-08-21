@@ -21,7 +21,7 @@ public:
 
 void getNodes(Node* node, int level)
 {
-	if(node == nullptr)
+	if(node == nullptr && level<0)
 		return;
 
 	if(level==0)
