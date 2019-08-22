@@ -1,0 +1,291 @@
+
+*******SET 1 : LINEAR DATA STRUCTURES********
+
+------
+ARRAYS
+------
+
+Access Time: 	O(1)
+Search Time: 	O(n), O(log(N)) for sorted array
+Insertion Time: O(n) worst case being inserting in the first element, so need to push all elements to the right
+Deletion Time: 	O(n) same
+
+------
+Linked List
+------
+
+Access Time: 	O(n)
+Search Time: 	O(n) no matter is sorted or note ****
+Insertion Time: O(1) if the node is known
+Deletion Time: 	O(1) if the node and previous node's address is known
+
+------
+Stacks (LIFO)
+------
+
+Access Time: 	O(n) worst case
+Search Time: 	O(n)
+Insertion Time: O(1) always at the top
+Deletion Time: 	O(1) always at the top
+
+(Can be implemented by both array and LL)
+Usecase: removes recursion, when calling functions, last fn should be called first,
+when browsing webpages back button works on stacks, undo operation in text editors
+
+
+------
+Queues (FIFO)
+------
+
+Access Time:	O(n) worst case
+Search Time:	O(n) worst case
+Insertion Time:	O(1)
+Deletion Time:	O(1)
+
+2 principle operations: Enqueue and Dequeue. (Can be implemented by both array and LL)
+Usecase: When sharing resources among processes, CPU scheduling,
+when rate of receiving is not same as rate of sending of data
+
+________________________________________________________________________
+
+
+*******SET 2 : Non-Linear DS *******
+
+-----------
+Binary Tree(Hierarchial DS)
+-----------
+
+Tree Traversal:	O(n) 
+
+-----------
+Binary Search Tree(Hierarchial DS)
+-----------
+B.T with with additional property
+
+Access Time:	O(h) worst case
+Search Time:	O(h) worst case
+Insertion Time:	O(h)
+Deletion Time:	O(h)
+Balanced Binary Tree : h = Olog(n)
+
+
+
+-----------
+Binary Heap(Hierarchial DS) //TODO
+-----------
+
+Access Time:	O(n) worst case
+Search Time:	O(logn) worst case
+Insertion Time:	O(logn)
+Deletion Time:	O(logn)
+
+
+
+-----------
+Hashing
+-----------
+
+Space:			O(n) worst case
+Search Time:	O(1) avg, O(n) worst case
+Insertion Time:	O(1) avg, O(n) worst case
+Deletion Time:	O(1) avg, O(n) worst case
+
+Always prefer over BST (Only advtg BST has is its ordered and easy to find floor and ceil values)
+Hashing Function: should be 1. easiy computable, 2. uniformly distribute the keys
+
+--------------------------------
+--------------------------------
+--------------------------------
+
+Linked Lists:
+not cache friendly. unlike arrays, elements are not in contiguous locations
+In an array, memory is assigned during compile time while in a Linked list it is allocated during execution or runtime.
+LL needs more memory per element to store pointers as well. But memory 'utilization' of a LL is better
+
+//Add a node to the front	[O(n)]
+	struct Node
+	{
+		int data;
+		struct Node* next;
+	};
+
+	void push(Node** head, int val)
+	{
+		//Node* temp = new Node;
+		struct Node* temp = (struct Node*) malloc (sizeof(struct Node));
+		temp->data = val;
+		temp.next = *head;
+		*head = temp;
+	}
+--
+
+void append(struct Node** head_ref, int new_data) 
+Note: need the head as if the list is empty you need to assign the temp as the head
+    if (*head_ref == NULL) 
+    { 
+       *head_ref = new_node; 
+       return; 
+    } 
+
+    struct Node *last = *head_ref;
+    while(last->next != NULL)		//IMP dont check if last !=NULL, then you can't append
+    	last = last->next;
+
+   [O(n)] worst case.
+   [O(1)] if we keep a note of the last node. So its better
+
+
+-----
+Array - Static DS
+Linked List 
+
+
+-----
+
+CIRCULAR LINKED LISTS ( ********* work with Last and not Head)
+Application: Time slicing in round robin fashion for operating systems where the tasks can be put in a circular queue implemented using cicular LL.
+Only 1 node needed to point to the head. and last->next also points to head. ( So no need for 2 (head and last) pointers).
+Any node can be head and we can trace every node from it. (Loop until 1st node is revisited).
+
+Have a pointer last always pointing to the last node and last->next should be head.
+While inserting the 1st node,
+
+if(last == nullptr)
+{
+	Node* last = new Node;
+	last->data = val;
+	last->next = last;
+	return last;	//Now the node points to itself
+}
+
+- Inserting at head (use last again)
+
+if(last != nullptr)
+{
+		Node* temp = new Node;
+		temp->data = val;
+		temp->next = last->next;
+		last->next = temp;
+		return last;
+}
+
+//never wanna lose last pointer so always return last. ****
+
+-Inserting at end
+
+	temp->next = last->next;
+	last->next = temp;
+	last = temp;
+	retrun last; //always return last
+
+
+-
+Printing cicular lists (use do while)
+In a conventional linked list, we traverse the list from the head node and stop the traversal when we reach NULL.
+In a circular linked list, we stop traversal when we reach the first node again.
+
+Node* p = last->next;	//make p point to the head
+do
+{
+	cout << p->value;
+	p = p->next;
+}while (p!=last->next);	//i.e untill p is not pointing to the head again
+
+or starting at any given point to print
+	
+	void traverse(Node* start)
+	{
+		Node* temp = start; (start n)
+		do
+		{
+			cout << temp->data;
+			temp = temp->next;
+		}while(temp != start)
+	}
+
+------
+Stacks
+------
+Implenmentation using
+	1. array
+	2. LL 
+
+LIFO
+push, pop, peek, isEmpty, overflow(full), underflow(empty)
+
+Time analysis:
+push, pop, peek, isEmpty() -> O(1) '.' no loops needed
+
+functions: push(int x), pop(), isEmpty(), peek()/top(),
+
+checks:
+if array is empty: means top = -1; then set error msg
+2 cases of push during event of overflow.
+	1. can't push more elements
+	2. use a dynamic array(of size preferrably twice the old array), then copy old array into new array, then push new value.
+		here, best case: O(1)
+		worst case: O(n) {for n copies to be made into new array}
+		avg case: O(1) 
+
+Create a stack class to access top and array. Else if in C declare a strcut or declare them as global
+	
+	class Stack
+	{
+		int top;
+	public:
+		int a[MAX_SIZE];
+		Stack() : top(-1);
+		push,pop,...etc all functions
+	}
+
+	main()
+	{
+		Stack s;
+		s.push(5);
+		s.pop();
+	}
+
+/////
+	
+	class Stack
+	{
+		int arr*;
+		int top;
+		int size;
+
+	public:
+		Stack(int n)
+		{
+			size = n;
+			arr = new int[size];
+			top1 = -1;				//no element check case
+			top2 = size;			//no element check case FOR 2ND STACK IMPLEMENTED USING SAME ARRAY. 
+									//starts at the end and grows left.
+		}
+	}
+
+--------------
+QUEUE
+--------------
+
+4 operarations: Enque, dequeue, front, rear
+
+application: resource sharing, data transferred async(IO buffer) rate of transfer and receive is not same
+
+
+------------
+BINARY TREES
+------------
+
+Heap is an implementation of tree: application priority queues
+
+Tree traversal:
+	1. Inorder (lRr)	- in BST this gives nodes in increasing order
+	2. Pre order- Rlr	- used to copy a tree
+	3. Post order - lrR - used to delete the tree
+
+	For implementation, use recurrance
+
+BFS starts visiting nodes from root while DFS starts visiting nodes from leaves.
+So if our problem is to search something that is more likely to closer to root, we would prefer BFS.
+And if the target node is close to a leaf, we would prefer DFS.

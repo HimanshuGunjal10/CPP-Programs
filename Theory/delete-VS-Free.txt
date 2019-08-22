@@ -1,0 +1,17 @@
+C++ delete
+C 	free
+
+delete
+is an operator
+deallocates memory in heap
+but the pointer is now a dangling pointer
+so make it point to null
+
+delete temp;
+temp = nullptr;
+
+
+
+free 
+is a function
+free(temp)
