@@ -15,10 +15,6 @@ public:				//use public if not accessing using objects
 	char* array;
 };
 
-void push(int x)
-{
-
-}
 
 //utility fn: isFull
 bool isFull (Stack* stack)

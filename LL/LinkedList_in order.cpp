@@ -7,7 +7,7 @@ struct node
 	node* next;
 };
 
-node* insertAsFirstElement(node* head, int value)
+node* get_node(int value)
 {
 	node* temp = new node;
 	temp->value = value;
@@ -18,47 +18,46 @@ node* insertAsFirstElement(node* head, int value)
 void insert(node* &head, int value)
 {
 	if(head == NULL)
-		head = insertAsFirstElement(head, value);
+	{
+		head = get_node(value);
+		return;
+	}
+
+	node* temp = get_node(value);
+
+	node* curr = head;
+	node *prev = head;
+
+	while(curr!=nullptr && curr->value < value)
+	{
+		prev = curr;
+		curr = curr->next;
+	}
+
+	//case1: new element is smaller than head
+
+	if(curr == head)
+	{
+		temp->next = curr;
+		head = temp;
+	}
+
+	//case2: new element is last element
+	else if(curr == nullptr)
+	{
+		prev->next = temp;
+	}
+
+	//case3: anywhere in between head and last element
 	else
 	{
-		node* temp = new node;
-		temp->value = value;
-		temp->next = NULL;
-
-		node* curr = new node;
-		node *prev = new node;
-		curr = head;
-//		while(curr->next!=NULL)
-//			curr = curr->next;
-//		curr->next = temp;
-		///
-		while(curr->value < value && curr->next!= NULL)
-		{
-			prev = curr;
-			curr = curr->next;
-		}
-		if(curr == head)
-			curr->next = temp;
-		else if (curr->next == NULL)
-		{
-			if(curr->value < value)
-				curr->next = temp;
-			else
-			{
-				prev->next = temp;
-				temp->next = curr;
-			}
-		}
-		else
-		{
-			temp->next = curr;
-			prev->next = temp;
-
-		}
+		prev->next = temp;
+		temp->next = curr;
 	}
+
 }
 
-void remove(node* head, int value)
+void remove(node* &head, int value)
 {
 	if(head==NULL)
 	{
@@ -67,29 +66,36 @@ void remove(node* head, int value)
 	}
 	else
 	{
-		node* curr = new node;
-		node *prev = new node;			// try malloc
-		curr = head;
-		while(curr->value != value && curr->next!= NULL)
+		node* curr = head;
+		node *prev = head;
+
+		while(curr->value != value && curr!= NULL)
 		{
 			prev = curr;
 			curr = curr->next;
 		}
-		if(curr->next == NULL)
+
+		//case 1: removing head
+		if(curr == head)
 		{
-			if(curr->value != value)
-			{
-				cout << "Element not found\n";
-				return;
-			}
-			else
-			{
-				prev->next = NULL;
-				//delete curr;			//this gives issues.
-			}
+			head = curr->next;
+			//delete curr;
+			//curr = nullptr;
 		}
-		prev->next = curr->next;
-		//delete curr;
+
+		//case 2: Node not found
+		else if(curr == nullptr)
+		{
+			cout << "Node not found!" << endl;
+		}
+
+		//case 3: removing any other node
+		else
+		{
+			prev->next = curr->next;
+			//delete curr;
+			//curr = nullptr;
+		}
 	}
 	return;
 }

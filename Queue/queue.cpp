@@ -22,7 +22,7 @@ class node
 {
 public:
 	bool isEmpty(node *head);
-	void insertAsFirstElement(node *&head, int number);
+	node* get_node(int number);
 	void push(node *&head, int number);
 	int pop(node *&head);
 	void showList();
@@ -40,12 +40,12 @@ bool node::isEmpty(node *head)
 		return false;
 }
 
-void node::insertAsFirstElement(node *&head, int number)
+node* node::get_node(int number)
 {
 	node *temp = new node;
 	temp->value = number;
 	temp->next = NULL;
-	head = temp;
+	return temp;
 	//cout << "head->next: " << head->next << endl;
 }
 
@@ -53,58 +53,35 @@ void node::push(node *&head, int number)
 {
 	if(isEmpty(head))
 		{
-			insertAsFirstElement(head, number);	//and not (*head)
+			head = get_node(number);
 		}
 	else
 	{
-		node *curr = new node;
-		curr = head;
+		node *curr = head;
 		while(curr->next != NULL)	//while(curr!=NULL) ...terminates
 		{
 			curr = curr->next;
 		}
-		if(curr == head)
-		{
-			node *temp = new node;
-			temp->value = number;
-			temp->next = NULL;
-			head->next = temp;
-		}
-		else
-		{
-			node *temp = new node;
-			temp->value = number;
-			temp->next = NULL;
-			curr->next = temp;
-		}
 
+		node *temp = get_node(number);
+		curr->next = temp;
 	}
 }
 
 int node::pop(node *&head)
 {
-	//if(isEmpty(head))
-	node *curr = new node;
-	node *prev = new node;
-	int pop_value;
-	curr = head;
-	while(curr->next!=NULL)
+	if(head == nullptr)
 	{
-		prev = curr;
-		curr = curr->next;
+		cout << "Empty list" << endl;
+		return INT_MIN;
 	}
-	if(curr == head)
-	{
-		cout << "List got empty!! " ;
-		pop_value = curr->value;
-		head = NULL;
-	}
-	else
-	{
-		pop_value = curr->value;
-		delete curr;
-		prev->next = NULL;
-	}
+	int pop_value = head->value;
+	//to delete node
+	node* temp = head;	//now temp points to where head points to now
+	head = head->next;
+	delete temp;
+	temp = nullptr;
+
 	return pop_value;
 }
 

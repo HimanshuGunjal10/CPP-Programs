@@ -17,24 +17,25 @@ bool isEmpty(StackNode* root)
 	return !root;
 }
 
-void push(StackNode** root, int val)
+void push(StackNode* &root, int val)
 {
 	StackNode* new_top = new StackNode;
 	new_top->data = val;
-	new_top->next = *root;
-	*root = new_top;
+	new_top->next = root;
+	root = new_top;
 }
 
-void pop(StackNode** root)
+void pop(StackNode* &root)
 {
-	if(isEmpty(*root))
+	if(isEmpty(root))
 	{
 		cout<< "Empty queue" << endl;
 		return;
 	}
-	StackNode* temp = *root;
-	*root = (*root)->next;
-	free(temp);
+	StackNode* temp = root;
+	root = root->next;
+	delete temp;
+	temp = nullptr;
 }
 
 void print(StackNode* root)
@@ -58,14 +59,13 @@ int peek(StackNode* root)
 int main()
 {
 	StackNode* root = nullptr;
-	//pop(&root);
-	push(&root, 5);
-	push(&root, 7);
-	push(&root, 3);
+	push(root, 5);
+	push(root, 7);
+	push(root, 3);
 	cout << "Peeking: " << peek(root) << endl;
-	push(&root, 1);
+	push(root, 1);
 	print(root);
-	pop(&root);
+	pop(root);
 	print(root);
 
 	cout << "La fin";

@@ -49,14 +49,14 @@ int calculate_diameter(Node* root)
 	if(root->left)
 		lheight = height(root->left);
 	else
-		lheight = 0;
+		lheight = -1;
 
 	if(root->right)
 		rheight = height(root->right);
 	else
-		rheight = 0;
-	cout << "l-r: " << lheight << rheight << endl;
-	int diam = lheight + rheight + 2;	//2 is for root node
+		rheight = -1;
+	cout << "l-r: " << lheight << "-" << rheight << endl;
+	int diam = lheight + rheight + 2;	//2 is for root node. Hence the -1 so theat it negates if there is not left or right subtree from the root itself
 	return diam;
 
 }

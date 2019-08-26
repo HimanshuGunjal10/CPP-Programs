@@ -7,26 +7,23 @@ struct node
 	node* next;
 };
 
-node* insertAsFirstElement(node* head, int value)
+node* get_node(int value)
 {
-	node* temp = new node;
-	temp->value = value;
-	temp->next = NULL;
-	return temp;
+		node* temp = new node;
+		temp->value = value;
+		temp->next = NULL;
+		return temp;
 }
 
 void insert(node* &head, int value)
 {
 	if(head == NULL)
-		head = insertAsFirstElement(head, value);
+		head = get_node(value);
 	else
 	{
-		node* temp = new node;
-		temp->value = value;
-		temp->next = NULL;
+		node* temp = get_node(value);
 
-		node* curr = new node;
-		curr = head;
+		node* curr = head;
 		while(curr->next!=NULL)
 			curr = curr->next;
 		curr->next = temp;
@@ -42,9 +39,8 @@ void remove(node* head, int value)
 	}
 	else
 	{
-		node* curr = new node;
-		node *prev = new node;			// try malloc
-		curr = head;
+		node* curr = head;
+		node *prev = head;
 		while(curr->value != value && curr!= NULL)
 		{
 			prev = curr;
@@ -56,7 +52,8 @@ void remove(node* head, int value)
 			return;
 		}
 		prev->next = curr->next;
-		delete curr;
+		delete curr;				//**********
+		curr = nullptr;				//**********
 	}
 	return;
 }
@@ -68,8 +65,7 @@ void display_list(node* head)
 		cout << "List is empty\n";
 		return;
 	}
-	node* curr = new node;
-	curr = head;
+	node* curr = head;
 	while(curr != NULL)
 	{
 		cout << curr->value << " ";
@@ -123,3 +119,4 @@ int main()
 
 	return 0;
 }
+

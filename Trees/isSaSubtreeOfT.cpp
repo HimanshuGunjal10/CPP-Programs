@@ -30,7 +30,7 @@ bool areIdentical(Node* T, Node* S)
 	if(T == nullptr && S == nullptr)
 		return true;
 
-	//if either of them goes null alone; false
+	//if either of them goes null alone; false	//NOte: this is after the and condition so means only 1 has gone null
 	if(T == nullptr || S == nullptr)
 		return false;
 

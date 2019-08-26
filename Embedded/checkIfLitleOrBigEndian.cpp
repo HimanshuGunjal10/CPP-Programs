@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	uint32_t num = 1;
+	uint32_t num = 1;		//don't do uint8_t
 	char* c = (char*)&num;
 	//char* c store the 1st byte only
 	//so if 1 is stored, then Little else Big

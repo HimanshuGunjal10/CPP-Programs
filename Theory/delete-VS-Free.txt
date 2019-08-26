@@ -1,5 +1,5 @@
-C++ delete
-C 	free
+C++ delete 	- for new operator
+C 	free	- for malloc 
 
 delete
 is an operator
@@ -15,3 +15,7 @@ temp = nullptr;
 free 
 is a function
 free(temp)
+
+
+
+ if you don't set deleted pointers to 0, you will get into trouble if you're doing double deletes.
