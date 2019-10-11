@@ -1,7 +1,7 @@
 /*
 Enumeration (or enum) is a user defined data type in C.
 It is mainly used to assign names to integral constants, the names make a program easy to read and maintain.
-Two enum names can have same value
+Two enum names can't have same value
 declared globally
 
 */

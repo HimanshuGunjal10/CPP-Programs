@@ -1,7 +1,7 @@
 #include: In C++, all lines that start with pound (#) sign are called directives and are processed by preprocessor which is a program invoked by the compiler. The #include directive tells the compiler to include a file named “iostream” (which contains declarations of all the standard input/output library functions.)
 printf – stdio.h	cout – iostream.h
 
-int main(int argc, char* argv[]) { /* ... */ }
+int main(int argc, char argv[]) { /* ... */ }
 it is never a good idea to use “void main()” or just “main()” as it doesn’t confirm standards. It may be allowed by some compilers though.
 
 Primitive data types and user-defined data types
@@ -30,3 +30,4 @@ int main()
 
 	return 0;
 }
+

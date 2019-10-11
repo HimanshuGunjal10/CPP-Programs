@@ -1,4 +1,6 @@
 
+/* Lol you could have coded much better than this!! This is rookie coding*/
+
 #include<stdio.h>
 #include<stdlib.h>
 //using namespace std;
@@ -42,7 +44,7 @@ void print(struct Node* head_ref)
 	}
 	printf("\n");
 }
-
+/*
 void swap(struct Node** head_ref, int x, int y)
 {
 	//case 0:
@@ -96,6 +98,48 @@ void swap(struct Node** head_ref, int x, int y)
 	struct Node* temp = currX->next;
 	currX->next = currY->next;
 	currY->next = temp;
+}
+*/
+
+/*replaced by the following easier code: */
+
+void swap(struct Node** head_ref, int x, int y)
+{
+	//case 0:
+	if (x==y)
+		return;
+
+	//case1: if list is empty
+	if(*head_ref == NULL)
+	{
+		printf("Empty list\n");
+		return;
+	}
+
+	struct Node* curr = *head_ref;
+
+	while(curr->data != x && curr->data != y)
+	{
+		curr = curr->next;
+	}
+
+	if(curr->data == x)
+	{
+		curr->data = y;
+		curr = curr->next;
+		while(curr->data != y)
+			curr = curr->next;
+		curr->data = x;
+	}
+
+	else if(curr->data == y)
+	{
+		curr->data = x;
+		curr = curr->next;
+		while(curr->data != x)
+			curr = curr->next;
+		curr->data = y;
+	}
 }
 
 int main()

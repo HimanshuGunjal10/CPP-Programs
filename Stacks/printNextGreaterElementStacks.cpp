@@ -28,6 +28,7 @@ void printNextGreater(int arr[], int size)
 		}
 		next = arr[i];
 
+
 		//check next with all elements in the stack
 		while(!s.empty() && s.top() < next)
 		{
@@ -57,3 +58,35 @@ int main()
 	cout << "La fin";
 	return 0;
 }
+
+
+/*
+working alternate soln. same concept but simplified
+
+void printNextGreater(int arr[], int size)
+{
+	stack<int> s;
+
+	s.push(arr[0]);
+
+	for(int i=1;i<size; i++)
+	{
+		while(!s.empty() && arr[i]>s.top())
+		{
+			cout << s.top() << "->" << arr[i] << endl;
+			s.pop();
+		}
+		s.push(arr[i]);
+	}
+	//all values left in stack have no next greater value
+	// print -1 for them
+	while(!s.empty())
+	{
+		cout << s.top() << "-> -1" << endl;
+		s.pop();
+	}
+
+}
+
+
+*/

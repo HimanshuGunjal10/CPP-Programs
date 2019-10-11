@@ -32,29 +32,27 @@ void insert(node* &head, int value)
 
 void remove(node* head, int value)
 {
-	if(head==NULL)
+	if(head==nullptr)
+		return;
+
+	node* curr = head;
+	node*prev = head;
+
+	while(curr!= nullptr && curr->value != value)
 	{
-		cout << "Empty list";
+		prev = curr;
+		curr = curr->next;
+	}
+	if(curr == nullptr)
+	{
+		cout << value << " was not found" << endl;
 		return;
 	}
-	else
-	{
-		node* curr = head;
-		node *prev = head;
-		while(curr->value != value && curr!= NULL)
-		{
-			prev = curr;
-			curr = curr->next;
-		}
-		if(curr == NULL)
-		{
-			cout << "Element not found\n";
-			return;
-		}
-		prev->next = curr->next;
-		delete curr;				//**********
-		curr = nullptr;				//**********
-	}
+
+	node* temp = curr;	//to free-up memory
+	prev->next = curr->next;
+	delete(temp);
+
 	return;
 }
 

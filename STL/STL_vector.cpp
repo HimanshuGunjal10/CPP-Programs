@@ -59,7 +59,7 @@ int main()
 	print(vec);
 
 	//note sort cannot be used for lists as list has birirectional pointers so l.begin() and l.end() do not work.
-	//note: sort algorith requires random access operators(v.begin() abd v.end() for e.g.)
+	//note: sort algorith requires random access operators(v.begin() and v.end() for e.g.)
 
 	make_heap(vec.begin(),vec.end());
 	print(vec);

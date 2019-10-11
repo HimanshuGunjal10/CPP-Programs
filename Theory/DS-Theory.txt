@@ -15,7 +15,7 @@ Linked List
 ------
 
 Access Time: 	O(n)
-Search Time: 	O(n) no matter is sorted or note ****
+Search Time: 	O(n) no matter is sorted or not  ****
 Insertion Time: O(1) if the node is known
 Deletion Time: 	O(1) if the node and previous node's address is known
 
@@ -114,20 +114,32 @@ LL needs more memory per element to store pointers as well. But memory 'utilizat
 		//Node* temp = new Node;
 		struct Node* temp = (struct Node*) malloc (sizeof(struct Node));
 		temp->data = val;
-		temp.next = *head;
+		temp->next = *head;
 		*head = temp;
+	}
+
+	//better
+
+	void push(Node* &head, int val)
+	{
+		//Node* temp = new Node;
+		struct Node* temp = (struct Node*) malloc (sizeof(struct Node));
+		temp->data = val;
+		temp->next = head;
+		head = temp;
 	}
 --
 
-void append(struct Node** head_ref, int new_data) 
+void append(struct Node* &head_ref, int new_data) 
 Note: need the head as if the list is empty you need to assign the temp as the head
-    if (*head_ref == NULL) 
+    if (head_ref == NULL) 
     { 
-       *head_ref = new_node; 
+       head_ref = new_node; 
        return; 
     } 
 
-    struct Node *last = *head_ref;
+    struct Node *last = 
+    head_ref;
     while(last->next != NULL)		//IMP dont check if last !=NULL, then you can't append
     	last = last->next;
 
@@ -211,12 +223,12 @@ Implenmentation using
 	2. LL 
 
 LIFO
-push, pop, peek, isEmpty, overflow(full), underflow(empty)
+push, pop, peek, empty, overflow(full), underflow(empty)
 
 Time analysis:
-push, pop, peek, isEmpty() -> O(1) '.' no loops needed
+push, pop, peek, empty() -> O(1) '.' no loops needed
 
-functions: push(int x), pop(), isEmpty(), peek()/top(),
+functions: push(int x), pop(), empty(), peek()/top(),
 
 checks:
 if array is empty: means top = -1; then set error msg

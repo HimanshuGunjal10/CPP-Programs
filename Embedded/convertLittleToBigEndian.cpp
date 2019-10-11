@@ -27,3 +27,14 @@ int main()
 	printf("\nLa fin");
 	return 0;
 }
+
+
+--------
+
+uint32_t convertToBigEndian(uint32_t &num)	//or vice versa
+{
+	return ( ((num >> 24) & 0x000000FF)
+			| ((num >> 8) & 0x0000FF00)
+			| ((num << 8) & 0x00FF0000)
+			| ((num << 24) & 0xFF000000) );
+}

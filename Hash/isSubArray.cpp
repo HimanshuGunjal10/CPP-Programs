@@ -1,9 +1,3 @@
-/*
- * TREE + HASH Table
- * print a tree vertically
- *
- */
-
 #include <iostream>
 #include<map>
 #include<vector>

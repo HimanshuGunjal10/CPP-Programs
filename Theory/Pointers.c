@@ -118,7 +118,7 @@ malloc() and calloc() return void * type and this allows these functions to be u
 { 
     // Note that malloc() returns void * which can be  
     // typecasted to any type like int *, char *, .. 
-    int *x = malloc(sizeof(int) * n); 
+    int *x = (int*)malloc(sizeof(int) * n); 
 } 
 
 --

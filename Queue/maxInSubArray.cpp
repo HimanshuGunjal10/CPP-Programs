@@ -11,7 +11,8 @@ void maxInSubArray(int arr[], int n, int k)
 {
 	//use queue
 	deque <int> Q(k);		//note k
-
+	
+	//case1: queue is empty and we need to consider 1st k elements all at once
 	for(int i=0; i<k; i++)
 	{
 		while(!(Q.empty()) && arr[i] >= arr[Q.back()])	//> or >= check

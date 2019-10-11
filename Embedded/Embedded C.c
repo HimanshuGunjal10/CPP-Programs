@@ -59,7 +59,7 @@ nxp vs motorola
 less succeptible to noise
 cheaper
 ack after each byte. So data send is ensured
-multiple masters to skupports arbitration
+multiple masters so supports arbitration
 multiple devices on same bus w/o more wires or select lines
 
 slower
@@ -76,7 +76,8 @@ while SPI requires additional signal (slave select lines) lines to manage multip
 "Limitations of I2C"
 Half-duplex communication, so data is transmitted only in one direction (because of the single data bus) at a time.
 Since the bus is shared by many devices, debugging an I2C bus (detecting which device is misbehaving) for issues is pretty difficult.
-The I2C bus is shared by multiple slave devices if anyone of these slaves misbehaves (pull either SCL or SDA low for an indefinite time) the bus will be stalled. No further communication will take place.
+The I2C bus is shared by multiple slave devices if anyone of these slaves misbehaves (pull either SCL or SDA low for an indefinite time) the bus will be stalled.
+No further communication will take place.
 I2C uses resistive pull-up for its bus. Limiting the bus speed.
 Bus speed is directly dependent on the bus capacitance, meaning longer I2C bus traces will limit the bus speed.
 
@@ -100,7 +101,7 @@ bit rate = baud rate x #bits per signal unit
 
 -x-
 
-segmentation fault occurs when a program tried to access a memory location that it is not allowed to access
+segmentation fault occurs when a program tries to access a memory location that it is not allowed to access
 or tried to access a memory location in a way that is not allowed (tried to access read-only memory) or kernel space
 
 Causes:
@@ -122,7 +123,7 @@ C99 std defines uint8_t etc dta types.
 
 macro VS function
 
-type checking				no type checking
+no type checking				type checking
 pre-processed				compiled
 so, difficult to debug		easy
 code length increases		stays same
@@ -163,7 +164,7 @@ num ^= (1<<4); //xor to toggle
 int bit = num & (1<<4);	//to check nth bit's value
 
 -x-
-to have a variable store only 1 bit, define a structure and access that bit using dot . operator e.g. here COmmsLineStatus.MessageRead
+to have a variable store only 1 bit, define a structure and access that bit using dot . operator e.g. here CommsLineStatus.MessageRead
 typedef struct
 {
   unsigned char TransmitBusy  : 1 ;
@@ -288,7 +289,7 @@ Right shift of a negative signed number has implementation-defined behaviour.
 
 -x-
 
-"Void pointer" is generic pointer. Has no restrictions so can be usede with any pointer after typecasting it.
+"Void pointer" is generic pointer. Has no restrictions so can be used with any pointer after typecasting it.
 Using the void pointer we can create a generic function that can take arguments of any data type.
 The memcpy and memmove library function are the best examples of the generic function, using these function we can copy the data from the source to destination.
 e.g.
@@ -353,14 +354,14 @@ extern "C"
 
 
 variable definition: compiler allocates memory and also does the inititalization
-variable declaration: tell the compiler the variable withthat a variable by that name and type exists will be defined somewhere else. (No mem allocation)
+variable declaration: tell the compiler that a variable by that name and type exists will be defined somewhere else. (No mem allocation)
 
 The extern keyword means "declare without defining".
 If there is no definition or more than one, an error is produced, possibly in the linking stage.
 
 -x-
 
-"inline"  keyword is a compiler directive that only suggests the compiler to substitute the body of the function at the calling the place.
+"inline"  keyword is a compiler directive that only suggests the compiler to substitute the body of the function at the calling place.
 It is an optimization technique used by the compilers to reduce the overhead of function calls.
 
 static inline void Swap(int *a, int *b)

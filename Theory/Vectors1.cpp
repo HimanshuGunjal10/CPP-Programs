@@ -53,5 +53,8 @@ int main()
 	v.clear();					//clears all elements
 	printVec(v);
 
+	//Note:
+	vector<int> vec2(3,10) //10 10 10
+
 	return 0;
 }

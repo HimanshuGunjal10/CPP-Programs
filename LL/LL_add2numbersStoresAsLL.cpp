@@ -29,11 +29,11 @@ void push(Node** head_ref, int new_data)
 return the head node of resultant list */
 Node* addTwoLists (Node* first, Node* second)
 {
-	Node* res;
-	Node* res_head;
+	Node* res = nullptr;
+	Node* res_head = nullptr;
 	int sum, carry = 0;
 
-	while(first && second)
+	while(first || second)
 	{
 		sum = carry + (first? first->data : 0) + (second? second->data : 0);
 		carry = sum/10;
@@ -50,31 +50,10 @@ Node* addTwoLists (Node* first, Node* second)
 		}
 
 		//iterate further in the list
-		first = first->next;
-		second = second->next;
-	}
-	if(first)
-	{
-		while(first)
-		{
-			sum = carry + first->data;
-			res->next = newNode(sum%10);
-			carry = sum/10;
+		if(first)
 			first = first->next;
-			res = res->next;
-		}
-	}
-
-	else if(second)
-	{
-		while(second)
-		{
-			sum = carry + second->data;
-			res->next = newNode(sum);
-			carry = sum/10;
+		if(second)
 			second = second->next;
-			res = res->next;
-		}
 	}
 	if (carry)
 		res->next = newNode(carry);
@@ -100,8 +79,8 @@ int main(void)
 	Node* second = NULL;
 
 	// create first list 7->5->9->4->6
-	push(&first, 6);
-	push(&first, 4);
+	push(&first, 9);
+	push(&first, 9);
 	push(&first, 9);
 	push(&first, 5);
 	push(&first, 7);

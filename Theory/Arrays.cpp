@@ -141,7 +141,7 @@ Arrays are always passed as pointers. Hence, we also need to pass size of array 
 //main
 	strstruct s1,s2;
 	s1.strptr = new char[10];
-	//or
+
 	strcpy(s1.str,"Hello");
 	s2 = s1;
 
@@ -165,6 +165,7 @@ Arrays are always passed as pointers. Hence, we also need to pass size of array 
 	int a[][2] = {{1,2},{3,4}}; // Works
 
 --
+****
 //char array v/s pointers to string literals
 	char s[] = "himanshu" //creates a character array of size 9 ('\0' added) _ stored in stack (actually displayed size is 8 and not 9) 
 	char *strptr = "geeksquiz"	//creates pointer to a string literal _ 'strptr' stored in stack but 'geeksquiz' stored in read only mem ***
@@ -206,7 +207,7 @@ Arrays are always passed as pointers. Hence, we also need to pass size of array 
 
 /*
 Output:
-Enter a string: 
+Enter a string:  	
 Himanshu
 You entered: Himanshu 
 
