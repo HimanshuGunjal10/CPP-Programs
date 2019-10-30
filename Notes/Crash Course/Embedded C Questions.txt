@@ -1,0 +1,103 @@
+Embedded C Questions
+
+Volatile - its a qualifier to tell compiler not to optimize that variable. It might be getting updated somewhere else.(outside the scope of that program)
+	useful for memory mapped peripheral registers, global variables changed by an ISR, or in multiple tasks in a multi threaded aplication.
+	Rather than optimizing that variable, we want the compiler to load the variable every time it is encountered. If we declare a variable volatile, compiler will not cache it in its register.
+
+const + volatile?
+	yes. const restricts change in that program. But the variable can change from somewhere else. So, yes it is a possibility.
+
+volatile int* p - means the pointer is not volatile but the integer it is pointing to is.
+
+If we don't use null pointer, then we can't "verify" whether this pointer points to any valid location or not.
+
+Void pointer - genereic pointer means that it points to a variable that can be of any type. 
+	We can pass any kind of pointer and reference it as a void pointer. But to dereference it, we have to typecast the void pointer to correct data type.
+
+ISR does not return anything. An ISR returns nothing because there is no caller in the code to read the returned values.
+
+printf inside an ISR
+	Printf function in ISR is not supported because printf function is not reentrant, thread safe and uses dynamic memory allocation which takes a lot of time and can affect the speed of an ISR up to a great extent.
+
+	To debug ISR, definitive logs are better. Breakpoints may lead to wrong functionality.
+
+Static variable
+	If declared in a header file, then each source file that includes the header file will have its own copy of the variable so not recommended.
+	Static variables also cannot be declared without defining it.
+
+Inline function
+	These functions have a small definition and the function body is substituted in each call to the inline function. The argument passing and stack maintenance is skipped and it results in faster code execution, but it increases code size.
+
+header files data is stored in stack memory
+
+static 
+	1. A variable declared static within a function maintains its value between calls to that function.
+	2. A variable declared as static within a file, scope of that variable will be within that file, but it can't be accessed by other files.
+	3. Functions declared static within a module can be accessed by other functions within that module. That is, the scope of the function is localized to the module within which it is declared.
+
+RISC
+	small precise instructions - less transistors to implement - speed - less power - emphasis on s/w rather than h/w
+
+Hard RTOS - If the system fails to meet the deadline, even once, the system is considered to have failed. 
+Soft RTOS - its acceptable
+
+IPC - pipes, named pipes, semaphores, shared memory, msg queue, socket.
+
+Semaphore is actually a variable or abstract data type which controls access to a common resource by multiple processes.
+	Binary semaphore – It can have only two values (0 and 1). The semaphore value is set to 1 by the process in charge, when the resource is available.
+	Counting semaphore – It can have value greater than one. It is used to control access to a pool of resources.
+
+Spin lock
+	A thread waiting on a resource may loop and check the resource without doing any useful work.
+
+Difference - semaphore vs mutex
+Mutual exclusion and synchronization can be used by binary semaphore while mutex is used only for mutual exclusion.
+A mutex can be released by the same thread which acquired it. Semaphore values can be changed by other thread also.
+From an ISR, a mutex can not be used.
+The advantage of semaphores is that, they can be used to synchronize two unrelated processes trying to access the same resource.
+Semaphores can act as mutex, but the opposite is not possible.
+
+Virtual memory can be implemented using paging.
+When a process is to be swapped in, the pager guesses which pages will be used based on some algorithm, before the process is swapped out again. Instead of swapping whole process, the pager brings only the necessary pages into memory. By that way, it avoids reading in unnecessary memory pages, decreasing the swap time and the amount of physical memory.
+
+Declare a manifest constant that returns the number of seconds in a year using preprocessor? Disregard leap years in your answer.
+	#define SECONDS_IN_YEAR (60UL * 60UL * 24UL * 365UL)
+	Do not forget to use UL, since the output will be very big integer.
+
+The preprocessor commands are processed and expanded by the preprocessor before actual compilation. After preprocessing, the compiler takes the output of the preprocessor and the source code, and generates assembly code. Once compiler completes its work, the assembler takes the assembly code and produces an assembly listing with offsets and generate object files.
+The linker combines object files or libraries and produces a single executable file. It also resolves references to external symbols, assigns final addresses to functions and variables, and revises code and data to reflect new addresses.
+
+In static linking, all the library modules used in the program are placed in the final executable file making it larger in size
+In case of dynamic linking, only the names of the module used are present in the executable file and the actual linking is done at run time when the program and the library modules both are present in the memory.
+
+In case of dynamic linking, only the names of the module used are present in the executable file and the actual linking is done at run time when the program and the library modules both are present in the memory.
+	volatile int *ptr; //means the vaue pointed can change
+	ptr = (int *)0x67a9; 
+	*ptr = 0xaa55;
+
+	//amazon
+	if(*ptr != saved_value)
+		do something;
+		saved_value = *ptr;
+
+Write down the equivalent pointer expression for referring the same element a[i][j][k][l] ?
+a[i][j][k][l] == *(*(*(*(a+i)+j)+k)+l)
+
+ int const * p = 5;
+ printf("%d",++(*p));
+ The above program will result in compilation error stating “Cannot modify a constant value”. Here p is a pointer to a constant integer. But in the next statement, we are trying to modify the value of that constant integer. It is not permissible in C and that is why it will give a compilation error.
+
+
+ unsigned int a = 2;
+ int b = -10;
+ (a + b > 0)?puts("greater than 0"):puts("less than 1");
+ Here the addition is between different integral types - one is unsigned int and another is int. So, all the operands in this addition are promoted to unsigned integer type and b turns to a positive number and eventually a big one. 
+
+
+Write a code fragment to set only bit 3 of an integer.
+ #define BIT(n) (0x1 << n)
+int a;
+void SetBit3()
+{
+   a |= BIT(3);
+}
