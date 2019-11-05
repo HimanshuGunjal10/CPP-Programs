@@ -177,6 +177,9 @@ temp = nullptr;
 free(temp); //
  if you don't set deleted pointers to 0, you will get into trouble if you're doing double deletes.
 
+More on pointers:
+https://www.ntu.edu.sg/home/ehchua/programming/cpp/cp4_PointerReference.html
+
 --------------------------------------------------------
 --------------------------------------------------------
 
@@ -500,7 +503,7 @@ watch from 29th minute
 
 
 	vector<int> res;
-	res.assign(nums.size(),0);			//*** returns size number of zeroes
+	res.assign(nums.size(),0);			//**** returns size number of zeroes	//imp
 	return res;
 
 	e.g
@@ -537,6 +540,7 @@ vector<int> vec(26);
 
 
 --
+//****imp
 read words from a sentence
 #include<sstream>
 

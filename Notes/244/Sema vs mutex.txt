@@ -1,0 +1,2 @@
+Semaphore - no priority inversion
+Mutex	  - Priority inversion

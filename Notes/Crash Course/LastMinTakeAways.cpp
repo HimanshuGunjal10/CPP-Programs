@@ -6,22 +6,6 @@ http://john-ahlgren.blogspot.com/2013/10/stl-container-performance.html
 
 -----------------------------------------------------------------------------------------------------------------
 
-	friend ostream& operator << (ostream& outs, const student& stud);	//2 arguments
-	friend istream& operator >> (istream& ins, student& stud);			//no const
-
-	ostream& operator << (ostream& outs, const student& stud)	//no student:: and no friend
-	{
-		outs << stud.id << " " << stud.name << endl;
-		return outs;
-	}
-	istream& operator >> (istream& ins, student& stud)
-	{
-		cout << "Enter id +space+ name + enter" ;
-		ins >> stud.id >> stud.name;
-		return ins;
-	}
-
-
 -x-
 ---------
 VECTORS
@@ -392,3 +376,11 @@ use maps to store nodes (print vertical tree code)
 map<int,vector<int>> m;
 
 m[count].push_back[node->data];		//(****)
+
+---	
+memset to create lookup table and initialize all values to -1
+    int n = str.length(); 
+  
+    // Create and initialize lookup table 
+    int lookup[n]; 
+    memset(lookup, -1, sizeof lookup); 

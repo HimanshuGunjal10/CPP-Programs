@@ -1,0 +1,43 @@
+A semaphore is an RTOS primitive and is guaranteed to be thread-safe.
+Semaphores are used to signal/synchronize tasks as well as protect resources.
+This signal can come from an interrupt service routine or from another task.
+Use as a means to signaling a task.
+
+Application: Wake up a task on recieving a semaphore from an ISR
+
+code:
+
+//defn global
+	xSemaphorehandle_t xSemaphore;	//no =
+
+
+//main
+	xSemaphore = xSemaphoreCreateBinary();
+	//tasks
+	xTaskCreate(vWaitOnSemaphore,"vWaitOnSemaphore",STACK_SIZE_WORDS,NULL,tskIDLE_priority+1,NULL);
+	xTaskCreate(vSemaphoreSupplier,"vSemaphoreSupplier",STACK_SIZE_WORDS,NULL,tskIDLE_priority+1,NULL);
+
+
+	void vWaitOnSemaphore(void *pvParameters)
+	{
+		while(1)
+		{
+			if(xSemaphoreTake(xSemaphore,PORTMAX_DELAY))	//put PORTMAX_DELAY=0 if you need to use SP as a flag.
+															//So, consumer will keep on checking every loop for a new flag(****)
+			{
+				//service it
+			}
+		}
+	}
+
+	void vSemaphoreSupplier(coid *pvParameters)
+	{
+		while(1)
+		{
+			//if something occurs
+			xSemaphoreGive(xSemaphore);		//xSemaphoreGiveFromISR(xSemaphore) to use ISR API and not cause any freezing issue
+			//rest of the code...
+		}
+	}
+
+

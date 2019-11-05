@@ -1,0 +1,53 @@
+
+low throughput (100-1000Khz)
+half-duplex BUS
+only uses two wires regardless of how many devices are on this BUS (Many sensors use this BUS because of its ease of adding to a system)
+
+Pins:
+	SCL - serial clock pin
+	SDA - serial data pin
+
+The clock line is usually controlled by the Master with the "exception" that the slave may pull it low to indicate to the master that it is not ready to send data. 
+The data line is "bi-directional" and is controlled by the Master while sending data, "and" by the slave when it sends data back after a "repeat-start condition".
+
+Open collector bus - no device shall have the capability of internally connecting either SDA or SCL wires to power source. 
+The communication wires are instead connected to the power source through a "pull-up" resistor. When a device wants to communicate, it simply lets go of the wire for it to go back to logical "high" or "1" or it can connect it to ground to indicate logical "0".  This achieves safe operation of the bus (no case of short circuit), even if a device incorrectly assumes control of the bus.
+
+i.e. All devices are always connected to VDD using a pull-up resistor. (So, if R is low, the device will draw high current)
+To take control of either SDA or SCL, the device lets go of that wires 
+
+Pros:
+	Unlike SPI, only 2 wires no matter how many devices
+	synchronous (unlike UART)
+	multi-master (unlike SPI)
+	multi-slave
+
+Cons:
+	slower (400KHz)
+	half duplex (sincew only 1 data wire (SDA))
+	complex state machine needed to handle communication
+	master only drive control (exception: slave can stop clock if it needs to hold mster to a stop state)
+
+For an I2C write transaction, the master sends three bytes and 99% of the cases, they are interpreted like the following:
+	Device Address
+	Device's register's address
+	Data
+
+An I2C driver should be "transaction-based" and the entire transfer should be carried out using a state machine.
+
+The master always initiates the transfer, and the device reading the data should always "ACK" the byte.
+
+1 transaction life cycle
+	Master sends START condition followed by device address.
+	Device that is addressed should then "ACK" using the 9th bit.
+	Master sends device's "memory address" (1 or more bytes).
+	Each byte should be ACK'd by the addressed slave.
+	Master sends the data to write (1 or more bytes).
+	Each byte should be ACK'd by the addressed slave.
+	Master sends the STOP condition.
+
+Two modes
+	read mode
+	write mode
+Refer link to learn more. Stopping for the night :)
+http://books.socialledge.com/books/embedded-drivers-real-time-operating-systems/page/i%C2%B2c-%28inter-integrated-circuit%29

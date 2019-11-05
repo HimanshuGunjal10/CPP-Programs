@@ -1,0 +1,89 @@
+Bitmasking:
+Bit-masking is a technique to selectively modify individual bits without affecting other bits.
+
+Bit Set 	- OR a mem location with a bit number and that part of the mem loc will get set
+for e.g.
+// Assume we want to set Bit#7 of a register called: REG
+
+	REG = REG | 0x80;
+	REG |= 0x80;
+	REG |= (1<<7);
+	REG |= (1<<7) | (1<<31);
+
+Bit Clear	- AND a mem location with a bit number and that part of the mem loc will get reset. Use ~
+for e.g.
+// Assume we want to reset Bit#7 of a register called: REG
+
+	REG = REG & (0x7F);
+	REG = REG & ~(0x80);
+	REG &= ~(1<<7);
+	REG &= ~( (1<8) | (1<<31) );
+
+Bit Toggle	- XOR operation
+// Using XOR operator to toggle 5th bit
+	REG ^= (1<<5);
+
+Bit Check
+// Suppose you want to check bit 7 of a register is set:
+	if(REG & (1<<7))
+	{
+		//Do something
+	}
+	OR
+	while (!(REG&(1<<7)));	//Do nothing till this (****)
+
+// we want to wait until bit#9 is 0
+	while((REG & (1<<9)) != 0);
+	OR
+	while(REG & (1<<9));
+
+// using registers of uC
+/* Make direction of PORT0.3 as OUTPUT */
+LPC_GPIO0->FIODIR |= (1 << 3);
+
+/* Setting bit 3 to 1 of IOPIN will turn ON LED
+ * and resetting to 0 will turn OFF LED.
+ */
+LPC_GPIO0->FIOPIN |= (1 << 3);
+
+/* Faster, better way to set bit 3 (no OR logic needed) */
+LPC_GPIO0->FIOSET = (1 << 3);
+
+/* Likewise, reset to 0 */
+LPC_GPIO0->FIOCLR = (1 << 3);
+
+--------------------------------------
+Lab 1 Code
+//GPIO0.cpp (Class implementation)
+
+Lab1_GPIO0::Lab1_GPIO0(uint8_t set_pin)
+{
+    pin = set_pin;
+}
+
+Lab1_GPIO0::Lab1_GPIO0()
+{
+    pin = 0;
+}
+
+void Lab1_GPIO0::setAsInput()	
+{
+    LPC_GPIO0-> FIODIR &= ~(1<<pin);
+}
+
+void Lab1_GPIO0::setAsOutput()
+{
+    LPC_GPIO0-> FIODIR |= (1<<pin);
+}
+
+void Lab1_GPIO0::setHigh()
+{
+    LPC_GPIO0->FIOPIN |= (1<<pin);
+}
+
+void Lab1_GPIO0::setLow()
+{
+    LPC_GPIO0->FIOPIN &= ~(1<<pin);
+}
+
+--------------------------------------

@@ -1,0 +1,44 @@
+UART:Universal Asynchronous Receiver Transmitter
+
+A crystal oscillator is typically used to drive a processor's clock.
+External crystal oscillator clocks are 20Mhz or less.
+So use a 4MHz clock and use anb internal multiplier to get 96MHz from it.
+	for processor - 96 MHz
+	for other peripherals - use a divider to get a lower frequency
+
+PLL(phase Locked Loop) - Control system - takes a reference freq and creates a higher freq
+To get a lower frequency, its better to use a freq divider rather than a PLL
+
+High frequency signals will be distorted due to:
+	Series inductance of board traces
+	Parallel capacitance due to board copper areas and fiber glass
+	Interference from other external signals like power signals and switching signals
+	Signal distortion may cause the MCU to malfunction.
+
+UART
+3 wires = fully duplex (Rx Tx) and GND (****)
+One to One communication
+	No address required
+	No master/slave
+	Baud rates of Tx and Rx must match. (typically 9600bps)
+
+UART Frame (****)
+10 bits
+	8 bit payload
+	2 bits overhead (start and stop bits)
+	optional parity bits
+
+Note: Usually uart0 is comprimised and dedicatedly serves for connecting the PC and uC for programming.
+
+Benefits:
+	Low h/w complexity
+	no clock
+	no device addressing required as 1 to 1
+
+Cons:
+	8 bits max payload
+	no master/slave
+	baud rates muct be same (usually 10% tolerance accepted0)
+
+
+Init
