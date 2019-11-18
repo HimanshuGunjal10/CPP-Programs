@@ -33,3 +33,13 @@ if said that only lower case a-z are present, use an int value and do bit manipu
 1.2
 ------------
 
+
+------------
+1.3 Stacks and Queues
+------------
+
+Stacks: Use to implement a recusrsive approach iteratively.
+usecase: when you are using recursion and want to temporarily store data and check in the next step as you recurse.
+if failed remove it
+
+Qstack Min
