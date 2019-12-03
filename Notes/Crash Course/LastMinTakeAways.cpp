@@ -139,7 +139,7 @@ insert()
 
 remove() use current and prev pointers
 
-	while(curr->value != value && curr!= NULL)
+	while(curr!= NULL && curr->value != value)
 	{
 		prev = curr;
 		curr = curr->next;
@@ -218,7 +218,7 @@ when reallocating, all iterators become invalid
 Deletion invalidates all iterators after the deleted element, iterators to elements BEFORE are still valid.
 
 Dequeue:
-All iterators may become invalid after an insertion or deletion, but pointers/references are always valid.
+All iterators may become invalid after an insertion or deletion, but pointers/references are always valid. //***//
 
 
 sort(vec.begin(),vec.end());
@@ -253,7 +253,7 @@ erase(5);
 s.lower_bound();
 s.upper_bound();
 
-emplace() vs insert()
+emplace() vs insert() //***//
 When we use insert, we create an object and then insert it into the multiset. With emplace(), the object is constructed in-place.
 
 // declaring set 

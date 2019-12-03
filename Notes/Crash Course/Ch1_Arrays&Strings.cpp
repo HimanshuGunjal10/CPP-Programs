@@ -85,7 +85,7 @@ i.e if found set letterarray[i] to 1, if found again set letterarray[i] set to 0
 once everything is done,
 we hould be left with at most one 1 in our letterarray
 i.e letterarray can be 00000000... or 0000100000 or 10000000... etc
-so just check of only 1 bit was set by using num & (num-1) technique
+so just check if only 1 bit was set by using num & (num-1) technique
 
 still O(n) though but its incrementally better.
 we have to visit all letters so O(n) would be for all

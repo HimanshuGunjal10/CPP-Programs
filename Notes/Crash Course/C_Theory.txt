@@ -1,0 +1,73 @@
+Difference b/w C and C++
+	C is a procedural programming language
+	 - does not support classes and objects
+	 - data and funcntions are separate entities as no concept of object
+	 - uses functions for input/output. For example scanf and printf.
+	 - malloc() calloc() free() (functions)
+	 - no exception handling
+	C++ is procedural + object oriented
+	 - so it a hybrid
+	 - data and functions are encapsulated together in form of an object
+	 - uses NAMESPACE which avoid name collisions.(namespace - a declarative region that provides a scope to the identifiers.
+	 - uses objects for input output. For example cin and cout.
+	 - new delete (operators)
+
+--
+scanf()
+
+int main() 
+{ 
+    int a; 
+    scanf("%*s %d", &a); 	//note: *s
+    printf("Input value read : a=%d",a); 
+    return 0; 
+} 
+  
+// Input: "blablabla 25" 
+// Output: Value read : 25 
+The %*s in scanf is used to ignore some input as required. In this case, it ignores the input until the next space or new line.
+Similarly if you write %*d it will ignore integers until the next space or new line.
+
+printf()
+fflush( stdout );
+scanf()
+
+--
+IPC
+	1. Shared Memory: 
+	2. Message Passing: Pr1 sends messageA to kernel. Kernel in turn sends it to messageB
+
+--
+Deadlock
+	occurs when all 4 occur simultaneously
+		1. Mutual Exclusion	-	one or more resources are non-sharable
+		2. Hold & Wait		-	holds at least 1 resource and is waiting for another resource
+		3. No Premeption	-	a resource can release its resources only on its own and not by anyone else
+		4. Circular wait 	-	a set of processes are waiting in circular form
+
+	Handle Deadlock
+		1. Prevention and thus avoidance
+		2. Detection and recovery - 
+			(using preemption - take the resouce and give it to another)
+			(using rollback - go back to the last safe checkpoint and restart execution from there)
+			(kill one or more processes)
+
+--
+Semaphore vs Mutex
+
+--
+
+
+
+
+--
+Register Spilling:
+	If we declare more variables than the registers available on the processor, where will they be stored?
+	Variables that dont fit are saved to a block of memory on the stack by the compiler; of course, to actually use them,
+	the compiler has to load them back into registers - probably booting something else out to memory at the same time!
+	from the compiler`s point of view is to figure out an optimal way to allocate registers.
+	This includes spilling as little as possible, and making sure to spill variables that won`t be used for a while
+
+--
+https://www.youtube.com/watch?v=E8Yh4dw6Diw:
+(from 9th min)

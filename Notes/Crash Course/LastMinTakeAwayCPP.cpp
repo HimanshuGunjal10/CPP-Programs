@@ -100,7 +100,7 @@ gets()
 
 	soln:
 	char s[MAX_LIMIT];
-	fgets(s,MAX_LIMIT,stdin)
+	fgets(s,MAX_LIMIT,stdin)	//***//
 --
 
 swapping strings
@@ -377,7 +377,7 @@ Slow-Fast runners
 			fast = fast->next;
 		}
 	}
-
+lol
 --
 Queue
 
@@ -536,11 +536,13 @@ watch from 29th minute
 --
 for less amount, dont use hashmap but use a array
 initialize a vector for 26 alphabets as:
-vector<int> vec(26);
+//vector<int> vec(26);
+vector<int> vec(26,0);	//check //***//
+
 
 
 --
-//****imp
+//***//
 read words from a sentence
 #include<sstream>
 
@@ -549,3 +551,45 @@ string temp;
 stringstream ss(str);
 while(ss >> temp)
 	...
+
+--
+
+--
+vector swap
+https://www.geeksforgeeks.org/difference-between-stdswap-and-stdvectorswap/
+
+--
+ insert and lookup operations in the hash map take a constant time.
+
+---
+using strings
+case insensitive compare for palindrome check
+LC : problem 125
+use:
+	isalnum(str[i]) returns true if char is between 0-9 or a-z or A-Z
+	and then
+	if(tolower(str[i]) != tolower(str[j]))
+		return false;
+
+//implementation of isalnum
+	if((s[j] >= '0' && s[j] <= '9') || (s[j] >= 'a' && s[j] <= 'z') || (s[j] >= 'A' && s[j] <= 'Z'))
+
+--
+recursion with ternary operator:
+
+incorrect: 	(haystack[i] == needle[j]) ? return recurseCheck(haystack,needle,++i,++j) : return -1;
+
+correct:	 return (haystack[i] == needle[j]) ? recurseCheck(haystack,needle,++i,++j) : -1;
+
+
+---
+use maps to store nodes (print vertical tree code)
+
+map<int,vector<int>> m;
+
+m[count].push_back[node->data];		//(****)
+
+
+--
+	int arr[10];
+	memset(arr,-1,10*sizeof((arr[0])));

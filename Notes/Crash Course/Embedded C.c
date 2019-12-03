@@ -20,7 +20,7 @@ so if you are using a pointer access the address, always typecast the #defined a
 
 // OR in one line
 
-	volatile uint32_t *ptr = (volatile uint32_t*)FLAG_ADDR;
+	volatile uint32_t *ptr = (volatile uint32_t*)FLAG_ADDR; //****//
 
 -x-
 
@@ -57,26 +57,29 @@ longer distance vs short distance
 nxp vs motorola
 
 less succeptible to noise
-cheaper
+cheaper  //****//
 ack after each byte. So data send is ensured
-multiple masters to skupports arbitration
+multiple masters to supports arbitration
 multiple devices on same bus w/o more wires or select lines
 
 slower
-draws more power
+draws more power  //****//
 logic needs a pullup resister
 extra over head due to start and stop bits
 
 
-"One great difference between I2C and SPI is that I2C supports multiple devices on the same bus without any additional select lines (work on the basis of device address)
+"One great difference between I2C and SPI is that I2C supports multiple devices on the
+same bus without any additional select lines (work on the basis of device address)
 while SPI requires additional signal (slave select lines) lines to manage multiple devices on the same bus."
 
 -x-
 
 "Limitations of I2C"
 Half-duplex communication, so data is transmitted only in one direction (because of the single data bus) at a time.
-Since the bus is shared by many devices, debugging an I2C bus (detecting which device is misbehaving) for issues is pretty difficult.
-The I2C bus is shared by multiple slave devices if anyone of these slaves misbehaves (pull either SCL or SDA low for an indefinite time) the bus will be stalled. No further communication will take place.
+Since the bus is shared by many devices, debugging an I2C bus (detecting which device is misbehaving)
+for issues is pretty difficult.
+The I2C bus is shared by multiple slave devices if anyone of these slaves misbehaves
+(pull either SCL or SDA low for an indefinite time) the bus will be stalled. No further communication will take place.
 I2C uses resistive pull-up for its bus. Limiting the bus speed.
 Bus speed is directly dependent on the bus capacitance, meaning longer I2C bus traces will limit the bus speed.
 
@@ -139,6 +142,18 @@ e.g.
 macro is total substitution
 	#define VALUE 10
 
+
+Difference between typedef and #define:
+
+typedef is limited to giving symbolic names to types only, whereas #define can be used to define an alias for values as well,
+e.g., you can define 1 as ONE, 3.14 as PI, etc.
+typedef interpretation is performed by the compiler where #define statements are performed by preprocessor.
+#define should not be terminated with a semicolon, but typedef should be terminated with semicolon.
+#define will just copy-paste the definition values at the point of use, while typedef is the actual definition of a new type.
+typedef follows the scope rule which means if a new type is defined in a scope (inside a function),
+then the new type name will only be visible till the scope is there. In case of #define, when preprocessor encounters #define,
+it replaces all the occurrences, after that (No scope rule is followed).
+
 -x-
 
 enum is user-defined data type and it consists a set of named constant integer.
@@ -163,7 +178,8 @@ num ^= (1<<4); //xor to toggle
 int bit = num & (1<<4);	//to check nth bit's value
 
 -x-
-to have a variable store only 1 bit, define a structure and access that bit using dot . operator e.g. here COmmsLineStatus.MessageRead
+to have a variable store only 1 bit, define a structure and access that bit using dot . operator
+e.g. here COmmsLineStatus.MessageRead
 typedef struct
 {
   unsigned char TransmitBusy  : 1 ;
@@ -195,7 +211,8 @@ swap 2 numbers without using a 3rd variable
  -x-
 
  Padding
- In the case of structure or union, the compiler inserts some extra bytes between the members of structure or union for the alignment
+ In the case of structure or union, the compiler inserts some extra bytes between
+ the members of structure or union for the alignment
  these extra unused bytes are called padding bytes and this technique is called padding.
  increases the performance of the processor at the penalty of memory.
  Note: Alignment of data types mandated by the processor architecture, not by language.
@@ -225,9 +242,25 @@ Dynamic memory allocation
  not destroyed by the compiler itself
  responsibility of the user to deallocate the allocated memory
 
+--
 "memory leak" occurs when you allocate a block of memory using the memory management function and forget to release it.
 use malloc but not free it later.
 
+Dynamically allocated memory effectively has no scope. That is, it stays allocated until it is explicitly deallocated or until the program ends
+(and the operating system cleans it up, assuming your operating system does that).
+However, the pointers used to hold dynamically allocated memory addresses follow the scoping rules of normal variables.
+
+You think that OS will clean up the memory when program is terminated. Your thinking is right but not always on all platforms.
+Most of the modern operating system does that. It is important to explicitly call delete because you may have some code in the destructor that you want to execute.
+Like maybe writing some data to a log file. If you let the OS free your memory for you, your code in your destructor will not be executed.
+It is good practice to deallocate it yourself and like I said above the OS wont call your destructor.Each acquired external resource
+(such as file,database connection,socket etc) should be released, otherwise there is resource lock.
+
+A better example than logging is releasing a system resource that is not automatically reclaimed by the operating system,
+like a cross-process semaphore, a network socket bind on a port, or a filesystem sharing lock.
+These are leaks that are felt by the OS even if the process terminates gracefully, on many modern operating systems.
+
+--
 the memory that is allocated by "calloc" is initialized with 0. //only difference between malloc and calloc
 
 The "realloc" function is used to resize the allocated block of memory.
@@ -243,15 +276,18 @@ Dynamic memory fragmentation has 2 types:
 	1. external fragmentation
 	2. internal fragmentation
 
-The external fragmentation is due to the small free blocks of memory (small memory hole) that is available on the free list but program not able to use it.
-The internal fragmentation is wasted of memory that is allocated for rounding up the allocated memory and in bookkeeping (infrastructure),
+The external fragmentation is due to the small free blocks of memory (small memory hole)
+that is available on the free list but program not able to use it.
+The internal fragmentation is wasted of memory that is allocated for rounding up the allocated memory
+and in bookkeeping (infrastructure),
 the bookkeeping is used to keep the information of the allocated memory.
 
 -x-
 
 "Free function":
+//***//
 free function gets the bookkeeping information(extra info created when using malloc) and releases the allocated memory.
-char *pcBuffer  =  malloc(sizeof(char) *  16); //Allocate the memory
+char *pcBuffer  =  (char*)malloc(sizeof(char) *  16); //Allocate the memory
  
 pcBuffer++; //Increment the pointer
  
@@ -267,7 +303,7 @@ In above expression, pfDisplayMessage is a pointer to a function taking one argu
 
 Usecase:
 	1. finite state machine
-	2. to provide the feature of polymorphism in C language …etc.
+	2. to provide the feature of polymorphism in C language
 
 -x-
 
@@ -290,7 +326,8 @@ Right shift of a negative signed number has implementation-defined behaviour.
 
 "Void pointer" is generic pointer. Has no restrictions so can be usede with any pointer after typecasting it.
 Using the void pointer we can create a generic function that can take arguments of any data type.
-The memcpy and memmove library function are the best examples of the generic function, using these function we can copy the data from the source to destination.
+The memcpy and memmove library function are the best examples of the generic function,
+using these function we can copy the data from the source to destination.
 e.g.
 	void * memcpy ( void * dst, const void * src, size_t num );
 
@@ -315,12 +352,14 @@ int* const p 		- pointing address cannot be changed
 
 -x-
 
-"static" used as global will keep the scope as only to the curremt ".c" file
+"static" used as global will keep the scope as only to the current ".c" file
 With the help of the static keyword before a funciton, we can make the scope of the function local
 i.e. it only accesses by the translation unit within it is declared.
 
 A static global variable      ===>>>  internal linkage.
 A non-static global variable  ===>>>  external linkage.
+
+https://stackoverflow.com/questions/92546/variable-declarations-in-header-files-static-or-not
 
 So global variable can be accessed outside of the file but the static global variable only accesses within the file in which it is declared.
 
