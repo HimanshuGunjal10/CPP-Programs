@@ -17,7 +17,7 @@ memset to initialize in C
 	memset(chararray,0,128)\
 
 --
-reduce sopace useage factor by 8
+reduce space useage factor by 8
 
 if said that only lower case a-z are present, use an int value and do bit manipulation
 	int checker = 0;

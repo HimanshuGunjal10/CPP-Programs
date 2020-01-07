@@ -22,7 +22,7 @@ int partition(int arr[], int low, int high)
 	int pivot = arr[high];
 	int i = low-1;
 
-	for(int j=low; j<=high-1; j++)			//did j=0 , j<=... only mistake
+	for(int j=low; j<high; j++)			//did j=0 , j<=... only mistake
 	{
 		if(arr[j]<=pivot)
 		{
@@ -35,6 +35,7 @@ int partition(int arr[], int low, int high)
 	return (i+1);
 }
 
+//worstcase O(n2), avg case: O(nlogn)
 void quick_sort(int arr[], int low, int high)
 {
 	if(low<high)

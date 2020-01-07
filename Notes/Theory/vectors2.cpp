@@ -27,7 +27,7 @@ void printVec (const vector<int>& b)			//only change here. Fn call will be the s
 	}
 }
 
-void printRevVec (const vector<int>& b)			//not advisable to pass it like this. Check advanced lessons
+void printRevVec (const vector<int>& b)			// advisable to pass it like this. Check advanced lessons
 {
 	if(b.empty())
 		cout << "Vector is empty \n";

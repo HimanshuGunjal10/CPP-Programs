@@ -8,14 +8,19 @@ int maxProfit(vector<int>& prices)
 	int min_price = INT_MAX;
 	int max_profit = 0;
 
-	for(unsigned int i=0; i< prices.size(); i++)
+	/*for(unsigned int i=0; i< prices.size(); i++)
 	{
 		if(prices[i] < min_price)
 			min_price = prices[i];
 		else if((prices[i] - min_price) > max_profit)
 			max_profit = prices[i] - min_price;
-	}
-
+	}*/
+	//simplified it
+	for(int i=0; i<prices.size(); i++)
+    {
+        min_price = min(prices[i],min_price);
+        max_profit = max(prices[i]-min_price,max_profit);
+    }
 	return max_profit;
 }
 

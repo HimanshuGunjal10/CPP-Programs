@@ -32,7 +32,7 @@
 //2D arrays: arr[i][j] = *(*ptr+i)+j)
 
 --
-//Double pointes are pointers to pointers
+//Double pointers are pointers to pointers
 
 	int val = 5;
 	int *p1 = &val;

@@ -9,6 +9,7 @@ void print(int arr[], int size)
 	cout << endl;
 }
 
+//worst cse: O(nlog(n))
 void merge(int arr[], int low, int mid, int high)
 {
 	int nL = mid - low + 1;
@@ -22,7 +23,7 @@ void merge(int arr[], int low, int mid, int high)
 
 	int i=0;
 	int j=0;
-	int k=low;
+	int k=low;	//imp
 
 	while(i<nL && j<nR)
 	{

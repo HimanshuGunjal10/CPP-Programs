@@ -51,6 +51,20 @@ void printInOrder(Node* root)
 	printInOrder(root->right);
 }
 
+/* short and simple implementation dated December 10 2019
+bool isBinary(node* root)
+{
+	if(root == nullptr)
+		return true;
+	if(root->left && root->left->data > root->data)
+		return false;
+	if(root->right && root->right->data < root->data)
+		return false;
+	return (isBinary(root->left) && isBinary(root->right));
+
+}
+*/
+
 bool isBinaryUtil(Node* root, Node* &prev)	//note &* prev
 {
 	//base case

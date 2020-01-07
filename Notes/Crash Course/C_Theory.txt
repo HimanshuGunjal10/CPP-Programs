@@ -56,11 +56,6 @@ Deadlock
 Semaphore vs Mutex
 
 --
-
-
-
-
---
 Register Spilling:
 	If we declare more variables than the registers available on the processor, where will they be stored?
 	Variables that dont fit are saved to a block of memory on the stack by the compiler; of course, to actually use them,

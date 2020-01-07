@@ -36,9 +36,9 @@ ListNode *detectCycle(ListNode *head)
 		if(fast == slow)
 			break;
 	}
-	if(fast != slow)	//loop detected
+	if(fast != slow)
 	{
-		cout << "No" << endl;
+		cout << "No loop" << endl;
 		return NULL;
 	}
 	else

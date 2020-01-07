@@ -18,17 +18,15 @@ void swap(int arr[], int i, int min_index)
 //Selection sort
 void selection_sort(int arr[], int size)
 {
-
-	int min_index;
 	for(int i=0; i<size; i++)
 	{
-		min_index = i;
+		int min_index = i;
 		for(int j=i+1;j<size;j++)
 		{
 			if(arr[j] < arr[min_index])
 				min_index = j;
 		}
-		swap(arr[i],arr[min_index]);
+		swap(arr,i,min_index);
 	}
 }
 

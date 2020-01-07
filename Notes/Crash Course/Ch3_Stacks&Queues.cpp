@@ -8,7 +8,7 @@ if failed remove it
 ------------
 
 Approach 1: maintain a new variable in the stack calss called minele and for each node, have the current min element stored
-when you push new just check if new element is less than top's minele and accordingly set the minele of the new node'
+when you push new just check if new element is less than top`s minele and accordingly set the minele of the new node
 For each node, we have another integer. so buliding up space
 
 Approach 2: maintain another stack of minelements.

@@ -8,21 +8,14 @@ void print(int arr[], int size)
 	cout << endl;
 }
 
-void swap(int arr[], int i, int min_index)
-{
-	int temp = arr[i];
-	arr[i] = arr[min_index];
-	arr[min_index] = temp;
-}
 
 //Selection sort
 void insertion_sort(int arr[], int size)
 {
-	int j=0;
 	for(int i=1; i<size; i++)
 	{
 		int insert_this = arr[i];
-		j=i-1;
+		int j=i-1;
 		while(j>=0 && arr[j]>insert_this)	// and not arr[j]>arr[i] as it changes
 		{
 			arr[j+1] = arr[j];

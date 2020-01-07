@@ -1,0 +1,19 @@
+insert multiple values in a vector
+	//reference LeetCode:1002
+
+	//code
+		vector<string> res;
+	for(int i=0; i<26; i++)
+	{
+		if(vec[i]<=0)
+			continue;
+		string s = string(1,i+'a');
+		res.insert(res.end(),vec[i],s);
+	}
+
+std::vector<unsigned int> array;
+
+// First argument is an iterator to the element BEFORE which you will insert:
+// In this case, you will insert before the end() iterator, which means appending value
+// at the end of the vector.
+array.insert(array.end(), { 1, 2, 3, 4, 5, 6 });

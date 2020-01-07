@@ -1,0 +1,21 @@
+Unity and CMock framework uses Ruby and Rake to turn your test_your_module.c into a
+standalone executable What this means is that each test_* is actually a separate executable and is
+compiled by resolving the header files you included in this test_your_module.c source file.
+
+When you include Mockbit_count.h , the UT framework will not build and include the real file
+bit_count.h . Instead, it will redirect the API as given in your header file with the mock framework's
+implementation which will impose Expect requirements in your unit-tests.
+
+void test_steer_processor__move_right(void)
+{
+	steer_right_Expect();
+	steer_processor(40,60);
+}
+
+//.c
+bool queue__push(queue_S *queue, uint8_t push_value)
+size_t queue__get_count(queue_S *queue)
+
+//test.c
+	TEST_ASSERT_TRUE(queue__push(&q,3));
+	TEST_ASSERT_EQUAL(1,queue__get_count(&q));
