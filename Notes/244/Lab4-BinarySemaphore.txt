@@ -1,4 +1,0 @@
-Semaphore - no priority inversion
-Mutex	  - Priority inversion
-
-mutex(token) - less efficient(time to upgrade priority of a low pr task to higher pr task) to enable priority inversion to preserve RTOS property of running the higher priority task always.
